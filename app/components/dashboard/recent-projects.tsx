@@ -15,12 +15,12 @@ const RecentProjects = ({ data }: { data: Project[] }) => {
         <CardTitle>Recent Projects</CardTitle>
       </CardHeader>
       <CardContent className='space-y-4'>
-        {data.length === 0 ? (
+        {data?.length === 0 ? (
           <p className='text-center text-muted-foreground'>
             No recent projects
           </p>
         ) : (
-          data.map((project) => {
+          data?.map((project) => {
             const projectProgress = getProjectProgress(project.tasks);
             return (
               <div key={project._id} className='border rounded-lg p-4'>

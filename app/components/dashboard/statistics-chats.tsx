@@ -150,7 +150,7 @@ const StatisticsCharts = ({
                   }
                   labelLine={false}
                 >
-                  {projectStatusData.map((entry, index) => (
+                  {projectStatusData?.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
@@ -197,7 +197,7 @@ const StatisticsCharts = ({
                   }
                   labelLine={false}
                 >
-                  {taskPriorityData.map((entry, index) => (
+                  {taskPriorityData?.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>

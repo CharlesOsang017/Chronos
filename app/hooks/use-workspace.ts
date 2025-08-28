@@ -39,6 +39,18 @@ export const useGetWorkspaceDetailsQuery = (workspaceId: string) => {
 export const useInviteMemberMutation = () => {
     return useMutation({
         mutationFn: (data: { email: string, workspaceId: string, role: string }) =>
-             postData(`/workspaces/${data.workspaceId}/invite-member`, data)
+            postData(`/workspaces/${data.workspaceId}/invite-member`, data)
+    })
+}
+
+export const useAcceptInviteByTokenMutation = () => {
+    return useMutation({
+        mutationFn: (token: string) => postData(`/workspaces/accept-invite-token`, { token })
+    })
+}
+
+export const useAcceptGeneralInviteMutation = () => {
+    return useMutation({
+        mutationFn: (workspaceId: string) => postData(`/workspaces/accept-general-invite`, {})
     })
 }

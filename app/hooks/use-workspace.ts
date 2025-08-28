@@ -2,36 +2,43 @@ import type { WorkspaceForm } from "@/components/workspace/CreateWorkspace"
 import { fetchData, postData } from "@/lib/fetch-util"
 import { useMutation, useQuery } from "@tanstack/react-query"
 
-export const useCreateWorkspace= ()=>{
+export const useCreateWorkspace = () => {
     return useMutation({
         mutationFn: (data: WorkspaceForm) => postData("/workspaces", data)
     })
 }
 
-export const useGetWorkspacesQuery = ()=>{
+export const useGetWorkspacesQuery = () => {
     return useQuery({
         queryKey: ['workspaces'],
         queryFn: async () => fetchData("/workspaces")
     })
 }
 
-export const useGetWorkspaceQuery = (workspaceId: string)=>{
+export const useGetWorkspaceQuery = (workspaceId: string) => {
     return useQuery({
         queryKey: ['workspace', workspaceId],
         queryFn: async () => fetchData(`/workspaces/${workspaceId}/projects`)
     })
 }
 
-export const useGetWorkspaceStatsQuery = (workspaceId: string)=>{
+export const useGetWorkspaceStatsQuery = (workspaceId: string) => {
     return useQuery({
         queryKey: ['workspace', workspaceId, 'stats'],
         queryFn: async () => fetchData(`/workspaces/${workspaceId}/stats`)
     })
 }
 
-export const useGetWorkspaceDetailsQuery = (workspaceId: string)=>{
+export const useGetWorkspaceDetailsQuery = (workspaceId: string) => {
     return useQuery({
         queryKey: ['workspace', workspaceId, "details"],
         queryFn: async () => fetchData(`/workspaces/${workspaceId}`)
+    })
+}
+
+export const useInviteMemberMutation = () => {
+    return useMutation({
+        mutationFn: (data: { email: string, workspaceId: string, role: string }) =>
+             postData(`/workspaces/${data.workspaceId}/invite-member`, data)
     })
 }

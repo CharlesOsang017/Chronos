@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 import WorkspaceHeader from "./WorkspaceHeader";
 import ProjectList from "@/components/workspace/ProjectList";
 import CreateProjectDialog from "@/components/project/CreateProjectDialog";
+import InviteMemberDialog from "@/components/workspace/invite-member";
 
 const WorkspaceDetails = () => {
   const { workspaceId } = useParams<{ workspaceId: string }>();
@@ -27,26 +28,32 @@ const WorkspaceDetails = () => {
       </div>
     );
   }
-  console.log(data)
+  console.log(data);
   return (
-    <div className="space-y-8">
-      <WorkspaceHeader 
-      workspace={data.workspace}
-      members={data.workspace.members as any}
-      onCreateProject={() => setIsCreateProject(true)}
-      onInviteMember={() => setIsInviteMember(true)}
+    <div className='space-y-8'>
+      <WorkspaceHeader
+        workspace={data.workspace}
+        members={data.workspace.members as any}
+        onCreateProject={() => setIsCreateProject(true)}
+        onInviteMember={() => setIsInviteMember(true)}
       />
       <ProjectList
-      workspaceId={workspaceId}
-      projects={data.projects}
-      onCreateProject={() => setIsCreateProject(true)}
+        workspaceId={workspaceId}
+        projects={data.projects}
+        onCreateProject={() => setIsCreateProject(true)}
       />
 
       <CreateProjectDialog
-      isOpen={isCreateProject}
-      onOpenChange={setIsCreateProject}
-      workspaceId={workspaceId}
-      workspaceMembers={data.workspace.members as any}
+        isOpen={isCreateProject}
+        onOpenChange={setIsCreateProject}
+        workspaceId={workspaceId}
+        workspaceMembers={data.workspace.members as any}
+      />
+
+      <InviteMemberDialog
+        isOpen={isInviteMember}
+        onOpenChange={setIsInviteMember}
+        workspaceId={workspaceId}
       />
     </div>
   );

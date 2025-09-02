@@ -32,12 +32,12 @@ const VerifyEmail = () => {
       <h1 className='text-2xl font-bold'>Verify Email</h1>
       <p className='text-sm text-gray-500 mb-2'>Verifying your email...</p>
       <Card className='w-full max-w-md'>
-        {/* <CardHeader>
+        <CardHeader>
           <Link to={"/sign-in"} className='flex items-center gap-2 text-sm'>
             <ArrowLeft className='w-4 h-4 mr-2' />
             Back to sign in
           </Link>
-        </CardHeader> */}
+        </CardHeader>
         <CardContent>
           <div className='flex flex-col items-center justify-center py-4'>
             {isVerifying ? (

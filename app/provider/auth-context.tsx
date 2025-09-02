@@ -28,7 +28,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const checkAuth = async () => {
       setIsLoading(true);
       const userInfo = localStorage.getItem("user");
-
       if (userInfo) {
         setUser(JSON.parse(userInfo));
         setIsAuthenticated(true);

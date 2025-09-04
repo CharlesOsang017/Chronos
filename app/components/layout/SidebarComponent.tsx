@@ -20,6 +20,7 @@ import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import SidebarNav from "./SidebarNav";
 
+
 const SidebarComponent = ({
   currentWorkspace,
 }: {

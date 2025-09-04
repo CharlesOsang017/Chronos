@@ -25,7 +25,7 @@ const DashboarLayout = () => {
   const { isAuthenticated, isLoading } = useAuth();
 
   // console.log('isAuthenticated', isAuthenticated);
-  
+
   if (isLoading) {
     return <Loader />;
   }

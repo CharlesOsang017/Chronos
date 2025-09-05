@@ -2,6 +2,7 @@ import HomeHeader from "@/components/layout/HomeHeader";
 import type { Route } from "../../+types/root";
 import Hero from "@/components/layout/Hero";
 import Features from "@/components/layout/Features";
+import HowItWorks from "@/components/layout/HowItWorks";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -15,6 +16,7 @@ const home = () => {
       <HomeHeader />
       <Hero />
       <Features />
+      <HowItWorks />
     </div>
   );
 };

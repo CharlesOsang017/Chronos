@@ -2,7 +2,7 @@ import { CalendarCheck, Signal, Users } from "lucide-react";
 
 const Features = () => {
   return (
-    <div className='py-75 px-2 bg-base-200 flex flex-col items-center justify-center'>
+    <div className='py-55 px-2 bg-base-200 flex flex-col items-center justify-center'>
       <h1 className='bg-gray-200 text-sm py-1 px-1 rounded-md text-muted-foreground/105'>
         Our Features
       </h1>

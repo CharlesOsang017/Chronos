@@ -2,7 +2,7 @@ import { CalendarCheck, Lock, Send, Signal, Users } from "lucide-react";
 
 const HowItWorks = () => {
   return (
-    <div className='py-10 px-2 bg-base-200 flex flex-col items-center justify-center'>
+    <div className='py-5 px-2 bg-base-200 flex flex-col items-center justify-center'>
       <h1 className='bg-gray-200 text-sm py-1 px-1 rounded-md text-muted-foreground/105'>
         How It Works
       </h1>

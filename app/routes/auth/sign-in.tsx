@@ -24,32 +24,35 @@ import { Link, useNavigate } from "react-router";
 import { useLoginMutation } from "@/hooks/use-auth";
 import { toast } from "sonner";
 import { useAuth } from "@/provider/auth-context";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 export type SignInFormData = z.infer<typeof signInSchema>;
 const SignIn = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const form = useForm<SignInFormData>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      email: "", 
+      email: "",
       password: "",
     },
   });
 
-  const {mutate, isPending} = useLoginMutation()
-  const {login} = useAuth()
+  const { mutate, isPending } = useLoginMutation();
+  const { login } = useAuth();
   const handleOnSubmit = (values: SignInFormData) => {
     mutate(values, {
-      onSuccess: (data)=>{
-        login(data)
+      onSuccess: (data) => {
+        login(data);
         toast.success("Login successful");
-        navigate('/dashboard')
+        navigate("/dashboard");
       },
-      onError: (error: any)=>{
+      onError: (error: any) => {
         const errorMessage = error?.response?.data?.message;
         toast.error(errorMessage || "Something went wrong");
-      }
+      },
     });
   };
   return (
@@ -92,30 +95,57 @@ const SignIn = () => {
                 name='password'
                 render={({ field }) => (
                   <FormItem>
-                    <div className="flex items-center justify-between">
-                    <FormLabel>Password</FormLabel>
-                    <Link to="/forgot-password" className="text-sm text-blue-600">Forgot Password?</Link>
+                    <div className='flex items-center justify-between'>
+                      <FormLabel>Password</FormLabel>
+                      <Link
+                        to='/forgot-password'
+                        className='text-sm text-blue-600'
+                      >
+                        Forgot Password?
+                      </Link>
                     </div>
                     <FormControl>
-                      <Input
-                        type='password'
-                        placeholder='email@example.com'
-                        {...field}
-                      />
+                      <div className='relative flex items-center justify-between'>
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          placeholder='email@example.com'
+                          {...field}
+                        />
+                        {showPassword ? (
+                          <Eye
+                            onClick={() => setShowPassword(!showPassword)}
+                            size={20}
+                            className='absolute right-2 cursor-pointer'
+                          />
+                        ) : (
+                          <EyeOff
+                            size={20}
+                            className='absolute right-2 cursor-pointer'
+                            onClick={() => setShowPassword(!showPassword)}
+                          />
+                        )}
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button disabled={isPending} type='submit' className='w-full cursor-pointer'>
-                { isPending ? "Signing in..." : "Sign In"}
+              <Button
+                disabled={isPending}
+                type='submit'
+                className='w-full cursor-pointer'
+              >
+                {isPending ? "Signing in..." : "Sign In"}
               </Button>
             </form>
           </Form>
           <CardFooter className='flex justify-center mt-2'>
             <div className='flex items-center justify-center'>
               <p className='text-sm text-muted-foreground'>
-                Don&apos;t have an account? <Link className='text-blue-600' to='/sign-up'>Sign Up</Link>
+                Don&apos;t have an account?{" "}
+                <Link className='text-blue-600' to='/sign-up'>
+                  Sign Up
+                </Link>
               </p>
             </div>
           </CardFooter>

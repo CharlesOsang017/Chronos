@@ -23,9 +23,15 @@ import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router";
 import { useSignUpMutation } from "@/hooks/use-auth";
 import { toast } from "sonner";
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 
 export type SignUpFormData = z.infer<typeof signUpSchema>;
 const SignUp = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
+
   const navigate = useNavigate();
   const form = useForm<SignUpFormData>({
     resolver: zodResolver(signUpSchema),
@@ -43,10 +49,11 @@ const SignUp = () => {
     mutate(values, {
       onSuccess: () => {
         toast.success("Email Verification Required", {
-          description: "Please check your email to verify your account. If you haven't received the email, please check your spam folder.",
+          description:
+            "Please check your email to verify your account. If you haven't received the email, please check your spam folder.",
         });
         form.reset();
-        navigate("/sign-in")
+        navigate("/sign-in");
       },
       onError: (error: any) => {
         const errorMessage = error?.response?.data?.message;
@@ -109,11 +116,26 @@ const SignUp = () => {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input
-                        type='password'
-                        placeholder='email@example.com'
-                        {...field}
-                      />
+                      <div className='relative flex items-center justify-between'>
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          placeholder='email@example.com'
+                          {...field}
+                        />
+                        {showPassword ? (
+                          <Eye
+                            onClick={() => setShowPassword((prev) => !prev)}
+                            className='absolute right-2 cursor-pointer'
+                            size={20}
+                          />
+                        ) : (
+                          <EyeOff
+                            onClick={() => setShowPassword((prev) => !prev)}
+                            className='absolute right-2 cursor-pointer'
+                            size={20}
+                          />
+                        )}
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -126,11 +148,30 @@ const SignUp = () => {
                   <FormItem>
                     <FormLabel>Confirm Password</FormLabel>
                     <FormControl>
-                      <Input
-                        type='password'
-                        placeholder='email@example.com'
-                        {...field}
-                      />
+                      <div className='relative flex items-center justify-between'>
+                        <Input
+                          type={showConfirmPassword ? "text" : "password"}
+                          placeholder='email@example.com'
+                          {...field}
+                        />
+                        {showConfirmPassword ? (
+                          <Eye
+                            onClick={() =>
+                              setShowConfirmPassword((prev) => !prev)
+                            }
+                            className='absolute right-2 cursor-pointer'
+                            size={20}
+                          />
+                        ) : (
+                          <EyeOff
+                            onClick={() =>
+                              setShowConfirmPassword((prev) => !prev)
+                            }
+                            className='absolute right-2 cursor-pointer'
+                            size={20}
+                          />
+                        )}
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
